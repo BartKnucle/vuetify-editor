@@ -47,7 +47,7 @@ export default {
   },
   data () {
     return {
-      active: [],
+      active: ['root'],
       tree: [
         {
           id: 'root',
@@ -93,12 +93,48 @@ export default {
               name: 'v-navigation-drawer'
             }
           ]
+        },
+        {
+          name: 'Inputs',
+          items: [
+            {
+              name: 'v-autocomplete'
+            },
+            {
+              name: 'v-combobox'
+            },
+            {
+              name: 'v-form'
+            },
+            {
+              name: 'v-input'
+            },
+            {
+              name: 'v-overflow-btn'
+            },
+            {
+              name: 'v-select'
+            },
+            {
+              name: 'v-radio-group'
+            },
+            {
+              name: 'v-slider'
+            },
+            {
+              name: 'v-textarea'
+            },
+            {
+              name: 'v-text-field'
+            }
+          ]
         }
       ]
     }
   },
-  mounted: function() {
-    this.currentNode = this.tree
+  created: function() {
+    console.log(this.$parent.$options.components.VBtn)
+    this.currentNode = this.tree[0]
   },
   methods: {
     findNode(id, tree) {
@@ -170,6 +206,14 @@ export default {
           break;
         case 'v-card':
           child.color = this.getRandColor()
+          child.dark = false
+          child.disabled = false
+          child.flat = false
+          child.hover = false
+          child.light = false
+          child.ripple = false
+          child.tag = 'div'
+          child.tile = false
           break;
         case 'v-navigation-drawer':
           child.absolute = false

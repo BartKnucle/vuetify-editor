@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="node">
     <v-toolbar>
       <v-toolbar-title>{{ node.name }}</v-toolbar-title>
     </v-toolbar>
@@ -68,6 +68,11 @@
         v-if="node.floating !== undefined"
         v-model="node.floating"
         label="floating"
+      />
+      <v-switch
+        v-if="node.hover !== undefined"
+        v-model="node.hover"
+        label="hover"
       />
       <v-switch
         v-if="node.label !== undefined"
@@ -192,7 +197,7 @@ export default {
   props: {
     node: {
       type: Object,
-      required: true
+      required: false
     }
   }
 }
