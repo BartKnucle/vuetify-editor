@@ -32,7 +32,7 @@
       <componentTree :tree="tree[0].children"/>
     </v-content>
     <v-navigation-drawer app right>
-      <componentProperties :node="findNode(active[0], tree)"/>
+      <componentProperties :node.sync="currentNode"/>
     </v-navigation-drawer>
   </v-app>
 </template>
@@ -89,6 +89,9 @@ export default {
       ]
     }
   },
+  mounted: function() {
+    this.currentNode = this.tree
+  },
   methods: {
     findNode(id, tree) {
       var foundNode = tree.find(node => {
@@ -135,11 +138,13 @@ export default {
     },
     getRandColor() {
       return '#'+(Math.random()*0xFFFFFF<<0).toString(16)
-    }/*,
-    activateNode: function() {}*/
-  }/*,
+    },
+    activateNode: function() {
+      this.currentNode = this.findNode(this.active[0], this.tree)
+    }
+  },
   watch: {
     active: 'activateNode'
-  }*/
+  }
 }
 </script>
