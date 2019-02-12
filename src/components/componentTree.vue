@@ -1,9 +1,13 @@
 <template>
 <div>
   <div v-for="item in tree" :key="item.id">
-    <component :is="item.name">
+    {{item.options}}
+    <component v-bind="item" :is="item.name" :ref="item.id"
+      @click="getComponent(item.id)">
+      {{ item.name }}
       <div v-if="item.children.length">
-        <componentTree :tree="item.children"/>
+        <componentTree :tree="item.children"
+          @click="getComponent()"/>
       </div>
     </component>
   </div>
@@ -16,6 +20,11 @@ export default {
     tree: {
       type: Array,
       required: true
+    }
+  },
+  methods: {
+    getComponent(id) {
+       //console.log(this.$refs[id])
     }
   }
 }

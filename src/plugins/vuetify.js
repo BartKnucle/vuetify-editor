@@ -1,26 +1,11 @@
 import Vue from 'vue'
-import Vuetify, {
-  VApp, // required
-  VNavigationDrawer,
-  VFooter,
-  VToolbar,
-  VFadeTransition,
-  VBtn,
-  VCard
-} from 'vuetify/lib'
+import Vuetify from 'vuetify/lib'
+import  * as components  from 'vuetify/lib/components'
 import 'vuetify/src/stylus/app.styl'
 
 Vue.use(
   Vuetify, {
-    components: {
-      VApp,
-      VNavigationDrawer,
-      VFooter,
-      VToolbar,
-      VFadeTransition,
-      VBtn,
-      VCard
-    },
+    components: components,
     iconfont: 'md'
   }
 )

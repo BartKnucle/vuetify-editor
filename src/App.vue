@@ -21,10 +21,7 @@
         </v-list>
       </v-menu>
     </v-toolbar>
-    <v-navigation-drawer
-      fixed
-      app
-    >
+    <v-navigation-drawer app>
       <v-treeview
         activatable
         :active.sync="active"
@@ -32,16 +29,21 @@
       </v-treeview>
     </v-navigation-drawer>
     <v-content>
-      <componentTree :tree="tree[0].children" />
+      <componentTree :tree="tree[0].children"/>
     </v-content>
+    <v-navigation-drawer app right>
+      <componentProperties :node="findNode(active[0], tree)"/>
+    </v-navigation-drawer>
   </v-app>
 </template>
 <script>
 import { default as componentTree } from './components/componentTree.vue'
+import { default as componentProperties } from './components/componentProperties.vue'
 export default {
   name: 'App',
   components: {
-    componentTree
+    componentTree,
+    componentProperties
   },
   data () {
     return {
@@ -58,10 +60,10 @@ export default {
           name: 'Grid',
           items: [
             {
-              name: 'V-Flex'
+              name: 'v-flex'
             },
             {
-              name: 'V-Layout'
+              name: 'v-layout'
             }
           ]
         },
@@ -69,10 +71,18 @@ export default {
           name: 'Buttons',
           items: [
             {
-              name: 'V-Btn'
+              name: 'v-btn'
             },
             {
-              name: 'V-Chips'
+              name: 'v-chip'
+            }
+          ]
+        },
+        {
+          name: 'Container',
+          items: [
+            {
+              name: 'v-card'
             }
           ]
         }
@@ -95,20 +105,41 @@ export default {
 
       return foundNode
     },
-    addChild: function(type) {
+    addChild: function(name) {
       if (this.active.length) {
         var node = this.findNode(this.active[0], this.tree)
-        node.children.push({
+        var child = {
           id: Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5),
-          name: type,
+          name: name,
           children: []
-        })
+        }
+        this.getOptions(child)
+        node.children.push(child)
       }
     },
-    activateNode: function() {}
-  },
+    getOptions: function(child) {
+      child.type = child.name
+      switch (child.name) {
+        case 'v-btn':
+          child.color = this.getRandColor()
+          break;
+         case 'v-chip':
+          child.color = this.getRandColor()
+          break;
+        case 'v-card':
+          child.color = this.getRandColor()
+          break;
+        default:
+          break;
+      }
+    },
+    getRandColor() {
+      return '#'+(Math.random()*0xFFFFFF<<0).toString(16)
+    }/*,
+    activateNode: function() {}*/
+  }/*,
   watch: {
     active: 'activateNode'
-  }
+  }*/
 }
 </script>
