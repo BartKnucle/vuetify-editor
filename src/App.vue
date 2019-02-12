@@ -2,7 +2,7 @@
   <v-app>
     <v-toolbar app>
       <v-toolbar-title>
-        <span>VUETIFY EDITOR</span>
+        <span>VUETIFY DESIGNER</span>
       </v-toolbar-title>
       <v-menu v-for="button in menu"
           :key="button.name"
@@ -85,6 +85,14 @@ export default {
               name: 'v-card'
             }
           ]
+        },
+        {
+          name: 'Actions',
+          items: [
+            {
+              name: 'v-navigation-drawer'
+            }
+          ]
         }
       ]
     }
@@ -125,12 +133,57 @@ export default {
       switch (child.name) {
         case 'v-btn':
           child.color = this.getRandColor()
+          child.absolute = false
+          child.block = false
+          child.bottom = false
+          child.dark = false
+          child.depressed = false
+          child.disabled = false
+          child.fab = false
+          child.fixed = false
+          child.flat = false
+          child.large = false
+          child.light = false
+          child.outline = false
+          child.right = false
+          child.ripple = false
+          child.round = false
+          child.rounded = false
+          child.tag = 'button'
+          child.text = child.name
+          child.tile = false
+          child.top = false
+          child['x-large'] = false
+          child['x-small'] = false
           break;
          case 'v-chip':
+          child.close = false
           child.color = this.getRandColor()
+          child.dark = false
+          child.disabled = false
+          child.label = false
+          child.light = false
+          child.outline = false
+          child.selected = false
+          child.small = false
+          child['text-color'] = this.getRandColor()
           break;
         case 'v-card':
           child.color = this.getRandColor()
+          break;
+        case 'v-navigation-drawer':
+          child.absolute = false
+          child.clipped = false
+          child.dark = false
+          child.fixed = false
+          child.floating = false
+          child['mini-variant'] = false
+          child['mini-variant-width'] = 80
+          child['mobile-break-point'] = 1260
+          child.permanent = false
+          child.stateless = false
+          child.temporary = false
+          child.touchless = false
           break;
         default:
           break;
