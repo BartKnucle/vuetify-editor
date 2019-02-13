@@ -3,6 +3,7 @@
   <div v-for="item in tree" :key="item.id">
     <component v-bind="item" :is="item.type" :ref="item.id"
       @click="getComponent(item.id)">
+      {{ item.name }}
       <div v-if="item.children.length">
         <componentTree :tree="item.children"
           @click="getComponent()"/>
