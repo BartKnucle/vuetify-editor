@@ -1,7 +1,6 @@
 <template>
 <div>
   <div v-for="item in tree" :key="item.id">
-    {{item.options}}
     <component v-bind="item" :is="item.type" :ref="item.id"
       @click="getComponent(item.id)">
       <div v-if="item.children.length">

@@ -4,19 +4,19 @@
       <v-toolbar-title>
         <span>VUETIFY DESIGNER</span>
       </v-toolbar-title>
-      <v-menu v-for="button in menu"
+      <v-menu v-for="button in componentsMenu"
           :key="button.name"
           offset-y>
-        <v-btn
+        <v-btn fab small
           slot="activator">
           {{ button.name }}
         </v-btn>
         <v-list>
           <v-list-tile
             v-for="item in button.items"
-            :key="item.name"
-            @click="addChild(item.name)">
-            <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+            :key="item"
+            @click="addChild(item)">
+            <v-list-tile-title>{{ item }}</v-list-tile-title>
           </v-list-tile>
         </v-list>
       </v-menu>
@@ -47,6 +47,8 @@ export default {
   },
   data () {
     return {
+      components: [],
+      componentsMenu: [],
       active: ['root'],
       tree: [
         {
@@ -54,86 +56,26 @@ export default {
           name: 'root',
           children: []
         }
-      ],
-      menu: [
-        {
-          name: 'Grid',
-          items: [
-            {
-              name: 'v-flex'
-            },
-            {
-              name: 'v-layout'
-            }
-          ]
-        },
-        {
-          name: 'Buttons',
-          items: [
-            {
-              name: 'v-btn'
-            },
-            {
-              name: 'v-chip'
-            }
-          ]
-        },
-        {
-          name: 'Container',
-          items: [
-            {
-              name: 'v-card'
-            }
-          ]
-        },
-        {
-          name: 'Actions',
-          items: [
-            {
-              name: 'v-navigation-drawer'
-            }
-          ]
-        },
-        {
-          name: 'Inputs',
-          items: [
-            {
-              name: 'v-autocomplete'
-            },
-            {
-              name: 'v-combobox'
-            },
-            {
-              name: 'v-form'
-            },
-            {
-              name: 'v-input'
-            },
-            {
-              name: 'v-overflow-btn'
-            },
-            {
-              name: 'v-select'
-            },
-            {
-              name: 'v-radio-group'
-            },
-            {
-              name: 'v-slider'
-            },
-            {
-              name: 'v-textarea'
-            },
-            {
-              name: 'v-text-field'
-            }
-          ]
-        }
       ]
     }
   },
   created: function() {
-    console.log(this.$parent.$options.components.VBtn)
+    for (var component in this.$parent.$options.components) {
+      let comp = this.$parent.$options.components[component]
+      if (comp.extendOptions) {
+        this.components.push(comp.extendOptions.name)
+        let index = this.componentsMenu.findIndex(item => item.name === comp.extendOptions.name.substr(2, 1))
+
+        if (index === -1) {
+          this.componentsMenu.push({
+            name: comp.extendOptions.name.substr(2, 1),
+            items: [comp.extendOptions.name]
+          });
+        } else {
+          this.componentsMenu[index].items.push(comp.extendOptions.name)
+        }
+      }
+    }
     this.currentNode = this.tree[0]
   },
   methods: {
@@ -158,6 +100,7 @@ export default {
         var child = {
           id: Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5),
           name: name,
+          type: name,
           children: []
         }
         this.getOptions(child)
@@ -165,7 +108,6 @@ export default {
       }
     },
     getOptions: function(child) {
-      child.type = child.name
       switch (child.name) {
         case 'v-btn':
           child.color = this.getRandColor()
