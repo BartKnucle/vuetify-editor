@@ -61,7 +61,34 @@ export default {
   created: function() {
     for (var component in this.$parent.$options.components) {
       let comp = this.$parent.$options.components[component]
-      if (comp.extendOptions) {
+      var componentException = [
+            'VMenuTransition',
+            'VDialogTransition',
+            'VDialogBottomTransition',
+            'VScaleTransition',
+            'VTabTransition',
+            'VTabReverseTransition',
+            'VFabTransition',
+            'VFadeTransition',
+            'VSlideXTransition',
+            'VSlideYTransition',
+            'VSlideXReverseTransition',
+            'VSlideYReverseTransition',
+            'VExpandTransition',
+            'VExpandXTransition',
+            'VCarouselTransition',
+            'VCarouselReverseTransition',
+            'VScrollXTransition',
+            'VScrollXReverseTransition',
+            'VScrollYTransition',
+            'VScrollYReverseTransition',
+            'VRowExpandTransition',
+            'VCardMedia', //Depreciated
+            'VJumbotron' //Depreciated
+          ]
+      var isNotException = componentException.findIndex(e => e === component)
+
+      if (comp.extendOptions && (isNotException === -1)) {
         let index = this.componentsMenu.findIndex(item => item.name === comp.extendOptions.name.substr(2, 1))
 
         if (index === -1) {
