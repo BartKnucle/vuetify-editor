@@ -157,7 +157,9 @@ export default {
     }
   },
   watch: {
-    active: 'activateNode'
+    active: function() {
+      console.log(this.active)
+    }
   }
 }
 </script>
