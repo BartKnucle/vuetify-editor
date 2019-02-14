@@ -147,7 +147,7 @@ export default {
       }
 
       child['text'] = ''
-      child['class'] = ''
+      //child['class'] = ''
     },
     getRandColor() {
       return '#'+(Math.random()*0xFFFFFF<<0).toString(16)
@@ -158,7 +158,8 @@ export default {
   },
   watch: {
     active: function() {
-      console.log(this.active)
+      this.activateNode()
+      //console.log(this.active)
     }
   }
 }
