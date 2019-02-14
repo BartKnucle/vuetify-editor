@@ -1,13 +1,9 @@
 <template>
-<div>
-  <component v-for="item in tree" :key="item.id" v-bind="item" :is="item.type" :ref="item.id"
-      @click="getComponent(item.id)">
-      <div v-if="item.children.length">
-        <componentTree :tree="item.children"
-          @click="getComponent()"/>
-      </div>
-    </component>
-</div>
+<v-layout>
+  <component v-for="item in tree" :key="item.id" v-bind="item" :is="item.type" :ref="item.id">
+    <componentTree v-if="item.children.length" :tree="item.children"/>
+  </component>
+</v-layout>
 </template>
 <script>
 export default {
