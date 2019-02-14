@@ -28,9 +28,9 @@
         :items="tree">
       </v-treeview>
     </v-navigation-drawer>
-    <v-content>
-      <componentTree :tree="tree[0].children"/>
-    </v-content>
+      <v-content>
+        <componentTree :tree="tree[0].children"/>
+      </v-content>
     <v-navigation-drawer app right>
       <componentProperties :node.sync="currentNode"/>
     </v-navigation-drawer>
