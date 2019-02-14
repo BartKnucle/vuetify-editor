@@ -48,7 +48,9 @@ export default {
             'returnValue',
             'activator',
             'zIndex',
-            'transition'
+            'transition',
+            'class',
+            'text'
           ]
           var isNotException = typeException.findIndex(item => item === type)
 
@@ -59,6 +61,11 @@ export default {
                 type: this.$parent.$parent.$parent.$parent.$options.components[node.name].options.props[type]['type'].name
               })
             }
+          } else {
+            types.push({
+                label: type,
+                type: 'String'
+            })
           }
         } catch(err) {
           console.log(type, err)

@@ -140,11 +140,14 @@ export default {
     },
     getOptions: function(child) {
       //console.log(this.$parent.$options.components[child.name])
-      /*for (var props in this.$parent.$options.components[child.name].options.props) {
+      for (var props in this.$parent.$options.components[child.name].options.props) {
         if (!this.$parent.$options.components[child.name].options.props[props].default) {
           child[props] = null
         }
-      }*/
+      }
+
+      child['text'] = ''
+      child['class'] = ''
     },
     getRandColor() {
       return '#'+(Math.random()*0xFFFFFF<<0).toString(16)

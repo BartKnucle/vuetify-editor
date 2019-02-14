@@ -1,6 +1,7 @@
 <template>
 <v-layout>
   <component v-for="item in tree" :key="item.id" v-bind="item" :is="item.type" :ref="item.id">
+    <template v-if="item.text !== ''">{{ item.text }}</template>
     <componentTree v-if="item.children.length" :tree="item.children"/>
   </component>
 </v-layout>
